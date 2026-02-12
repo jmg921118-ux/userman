@@ -32,5 +32,5 @@ public class UserController {
         GetUserResponse getUserResponse = userService.getOne(userId);
         return ResponseEntity.status(HttpStatus.OK).body(getUserResponse);
     }
-    @Getter
+
 }
