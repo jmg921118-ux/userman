@@ -3,6 +3,7 @@ package com.example.userman.user.controller;
 import com.example.userman.user.dto.*;
 import com.example.userman.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,5 @@ public class UserController {
         GetUserResponse getUserResponse = userService.getOne(userId);
         return ResponseEntity.status(HttpStatus.OK).body(getUserResponse);
     }
-    @Get
+    @Getter
 }
