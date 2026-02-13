@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Getter
-public class SignUpRequest {
+public class  SignUpRequest {
     @NotBlank
     private String username;
     @Email

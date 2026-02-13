@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "schedules")
+@Table(name = "schedule")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
 

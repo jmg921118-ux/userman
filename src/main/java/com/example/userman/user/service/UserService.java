@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
+    //유저 생성
     @Transactional
     public SignUpResponse save(SignUpRequest request) {
         User user = new User(
@@ -31,7 +34,7 @@ public class UserService {
         );
 
     }
-
+    // 로그인
     @Transactional(readOnly = true)
     public SessionLogin login(LogInRequest request) {
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(
@@ -45,6 +48,7 @@ public class UserService {
 
 
     }
+    // 단건 조회
     @Transactional(readOnly = true)
     public GetUserResponse getOne (Long userId){
         User user = userRepository.findById(userId).orElseThrow(
@@ -52,10 +56,37 @@ public class UserService {
         );
         return new GetUserResponse(
                 user.getId(),
+                user.getUsername(),
                 user.getEmail(),
-                user.getPassword()
+                user.getCreatedAt(),
+                user.getModifiedAt()
         );
 
     }
 
+    public List<GetUserResponse> getAllUsers() {
+        List<User> users = userRepository.findAll();
+
+        List<GetUserResponse>dtos = new ArrayList<>();
+        for(User user : users) {
+            GetUserResponse dto = new GetUserResponse(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getCreatedAt(),
+                    user.getModifiedAt()
+            );
+            dtos.add(dto);
+
+        }
+        return dtos;
+    }
+
+    public UpdateNameResponse updateUser(Long userId, UpdateNameResponse request) {
+
+        return null;
+    }
+
+    public void deleteUser(Long userId) {
+    }
 }
